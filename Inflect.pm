@@ -1,6 +1,6 @@
 package Lingua::PT::Inflect;
 
-use 5.008;
+use 5.006;
 use strict;
 use warnings;
 use Lingua::PT::Hyphenate;
@@ -19,7 +19,7 @@ our @EXPORT = qw(
 	sing2plural
 );
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 =head1 NAME
 
@@ -67,9 +67,26 @@ BEGIN {
 
 }
 
+#
+
+sub new {
+  my ($self, $word) = @_;
+  bless \$word, $self;
+}
+
 sub sing2plural {
-  $_ = shift;
-  defined $_ || return undef;
+  defined $_[0] || return undef;
+
+  my $word;
+  if (ref($_[0]) eq 'Lingua::PT::Inflect') {
+    my $self = shift;
+    $word = $$self;
+  }
+  else {
+    $word = shift;
+  }
+
+  $_ = $word;
 
   defined $exceptions{$_} && return $exceptions{$_};
 
@@ -92,21 +109,16 @@ __END__
 =head1 DESCRIPTION
 
 Converts Portuguese words from singular to plural. There may be some
-special cases that will fail (words ending in -ão or -s might fail);
-this should be taken care of soon.
+special cases that will fail (words ending in -ão or -s might fail, as
+many special cases are yet to be prevented; anyone volunteering to look
+at a huge list of words?)
 
 =head1 SEE ALSO
 
-If you're into Natural Language Processing tools, you may like this
-Portuguese site: http://natura.di.uminho.pt
+If you're looking for Natural Language Processing tools, you may like
+this Portuguese site: http://natura.di.uminho.pt
 
 Gramática Universal da Língua Portuguesa (Texto Editora)
-
-=head1 MESSAGE FROM THE AUTHOR
-
-If you're using this module, please drop me a line to my e-mail. Tell
-me what you're doing with it. Also, feel free to suggest new
-bugs^H^H^H^H^H features.
 
 =head1 AUTHOR
 

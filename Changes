@@ -1,5 +1,8 @@
 Revision history for Perl extension Lingua::PT::Inflect.
 
+0.04  Fri Sep 24 18:24:47 2004
+	- corrected a bug in the documentation
+
 0.03  Wed Sep 22 00:14:47 2004
 	- added META.yml
 	- Perl required version is now 5.006 (was 5.008)

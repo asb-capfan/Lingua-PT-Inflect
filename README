@@ -1,11 +1,11 @@
-Lingua/PT/Inflect version 0.03
+Lingua/PT/Inflect version 0.04
 ==============================
 
 Converts Portuguese words from singular to plural
 
   use Lingua::PT::Inflect;
 
-  $plural = sin2plural('anel')   # now holds 'anéis'
+  $plural = sing2plural('programador')   # now holds 'programadores'
 
 INSTALLATION
 

@@ -19,7 +19,7 @@ our @EXPORT = qw(
 	sing2plural
 );
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 =head1 NAME
 
@@ -29,7 +29,7 @@ Lingua::PT::Inflect - Converts Portuguese words from singular to plural.
 
   use Lingua::PT::Inflect;
 
-  $plural = sin2plural('anel')   # now holds 'aneis'
+  $plural = sing2plural('programador')   # now holds 'programadores'
 
 =cut
 

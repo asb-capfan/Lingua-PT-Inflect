@@ -19,7 +19,7 @@ our @EXPORT = qw(
 	sing2plural
 );
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 =head1 NAME
 
@@ -30,6 +30,13 @@ Lingua::PT::Inflect - Converts Portuguese words from singular to plural
   use Lingua::PT::Inflect;
 
   $plural = sing2plural('programador')   # now holds 'programadores'
+
+=head1 DESCRIPTION
+
+Converts Portuguese words from singular to plural. There may be some
+special cases that will fail (words ending in -ão or -s might fail, as
+many special cases are yet to be prevented; anyone volunteering to
+look at a huge list of words?)
 
 =cut
 
@@ -69,10 +76,31 @@ BEGIN {
 
 #
 
+=head1 METHODS
+
+=head2 new
+
+Creates a new Lingua::PT::Inflect object.
+
+If you're doing this lots of time, it would probably be better for you
+to use the sing2plural function directly (that is, creating a new
+object for each word in a long text doesn't seem so bright if you're
+not going to use it later on).
+
+=cut
+
 sub new {
   my ($self, $word) = @_;
   bless \$word, $self;
 }
+
+=head2 sing2plural
+
+Converts a word in the singular gender to plural.
+
+  $plural = sing2plural($singular);
+
+=cut
 
 sub sing2plural {
   defined $_[0] || return undef;
@@ -106,29 +134,29 @@ sub sing2plural {
 1;
 __END__
 
-=head1 DESCRIPTION
+=head1 TO DO
 
-Converts Portuguese words from singular to plural. There may be some
-special cases that will fail (words ending in -ão or -s might fail, as
-many special cases are yet to be prevented; anyone volunteering to look
-at a huge list of words?)
+=over 6
+
+=item * Several words are exceptions to the rules; there is a file of
+those words that need to be checked.
+
+=back
 
 =head1 SEE ALSO
 
-If you're looking for Natural Language Processing tools, you may like
-this Portuguese site: http://natura.di.uminho.pt
-
-Gramática Universal da Língua Portuguesa (Texto Editora)
+More tools for the Portuguese language processing can be found at the Natura
+project: http://natura.di.uminho.pt
 
 =head1 AUTHOR
 
-Jose Alves de Castro, E<lt>cog [at] cpan [dot] org<gt>
+Jose Castro, C<< <cog@cpan.org> >>
 
-=head1 COPYRIGHT AND LICENSE
+=head1 COPYRIGHT & LICENSE
 
-Copyright 2004 by Jose Alves de Castro
+Copyright 2004 Jose Castro, All Rights Reserved.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself. 
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
 
 =cut

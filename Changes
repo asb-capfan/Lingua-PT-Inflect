@@ -1,5 +1,9 @@
 Revision history for Perl extension Lingua::PT::Inflect.
 
+0.06  Mon Nov 01 19:49:00 2004
+	- minor changes in the documentation
+	- added pod.t and pod-coverage.t to the tests
+
 0.05  Wed Oct 27 11:28:00 2004
 	- tests are now more automated
 

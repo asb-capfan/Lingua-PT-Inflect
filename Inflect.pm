@@ -19,11 +19,11 @@ our @EXPORT = qw(
 	sing2plural
 );
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 =head1 NAME
 
-Lingua::PT::Inflect - Converts Portuguese words from singular to plural.
+Lingua::PT::Inflect - Converts Portuguese words from singular to plural
 
 =head1 SYNOPSIS
 
@@ -49,7 +49,7 @@ BEGIN {
     'alemão'	=> 'alemães',
   );
 
-  @rules = map { qr/$_/ } qw(ás ês el ol al oi ul m ão (?<=[aeiou]) (?<=[rnsz]));
+  @rules = map qr/$_/, qw(ás ês el ol al oi ul m ão (?<=[aeiou]) (?<=[rnsz]));
 
   %rules = (
     qr/ás/	=> 'ases',

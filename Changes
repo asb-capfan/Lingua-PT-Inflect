@@ -1,5 +1,8 @@
 Revision history for Perl extension Lingua::PT::Inflect.
 
+0.05  Wed Oct 27 11:28:00 2004
+	- tests are now more automated
+
 0.04  Fri Sep 24 18:24:47 2004
 	- corrected a bug in the documentation
 

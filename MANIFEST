@@ -3,4 +3,4 @@ Inflect.pm
 Makefile.PL
 MANIFEST
 README
-t/1.t
+t/01-basic.t

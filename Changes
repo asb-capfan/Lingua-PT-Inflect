@@ -1,5 +1,9 @@
 Revision history for Perl extension Lingua::PT::Inflect.
 
+0.02  Mon May 10 16:49:47 2004
+	- fixed the broken rules for words ending in -il
+	- added exceptions
+
 0.01  Mon May 10 16:49:47 2004
 	- first release ready. still has untreated cases
 

@@ -5,7 +5,7 @@
 
 # change 'tests => 1' to 'tests => last_test_to_print';
 
-use Test::More tests => 24;
+use Test::More tests => 28;
 BEGIN { use_ok('Lingua::PT::Inflect') };
 
 #########################
@@ -37,17 +37,11 @@ is(sing2plural('paul'),'pauis');
 is(sing2plural('anel'),'anéis');
 is(sing2plural('farol'),'faróis');
 
-TODO: {
+is(sing2plural('funil'),'funis');
+is(sing2plural('barril'),'barris');
 
-local $TODO = 'check if the last sillable is tonic or not, and decide on that';
-
-#is(sing2plural('funil'),'funis');
-#is(sing2plural('barril'),'barris');
-
-#is(sing2plural('réptil'),'répteis');
-#is(sing2plural('fóssil'),'fósseis');
-
-}
+is(sing2plural('réptil'),'répteis');
+is(sing2plural('fóssil'),'fósseis');
 
 is(sing2plural('gas'),'gases');
 is(sing2plural('francês'),'franceses');

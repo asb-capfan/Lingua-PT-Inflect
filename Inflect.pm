@@ -3,6 +3,7 @@ package Lingua::PT::Inflect;
 use 5.008;
 use strict;
 use warnings;
+use Lingua::PT::Hyphenate;
 
 require Exporter;
 
@@ -18,7 +19,7 @@ our @EXPORT = qw(
 	sing2plural
 );
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 NAME
 
@@ -28,60 +29,61 @@ Lingua::PT::Inflect - Converts Portuguese words from singular to plural.
 
   use Lingua::PT::Inflect;
 
-  $plural = sin2plural('anel')   # now holds 'anéis'
+  $plural = sin2plural('anel')   # now holds 'aneis'
 
 =cut
 
-my %sing2plural; # this hash stores special cases
+my (%exceptions,@rules,%rules);
 
 BEGIN {
-  %sing2plural = (
+  %exceptions = (
     'lápis'	=> 'lápis',
     'pires'	=> 'pires',
 
-    'pírex'	=> 'pírex',
-    'inox'	=> 'inox',
-
     'mão'	=> 'mãos',
+    'afegão'	=> 'afegãos',
 
     'pão'	=> 'pães',
     'capitão'	=> 'capitães',
     'cão'	=> 'cães',
-
-    'leão'	=> 'leões',
+    'alemão'	=> 'alemães',
   );
+
+  @rules = map { qr/$_/ } qw(ás ês el ol al oi ul m ão (?<=[aeiou]) (?<=[rnsz]));
+
+  %rules = (
+    qr/ás/	=> 'ases',
+    qr/ês/	=> 'eses',
+    qr/el/	=> 'éis',
+    qr/ol/	=> 'óis',
+    qr/al/	=> 'ais',
+    qr/oi/	=> 'ois',
+    qr/ul/	=> 'uis',
+    qr/m/	=> 'ns',
+    qr/ão/	=> 'ões',
+    qr/(?<=[aeiou])/	=> 's',
+    qr/(?<=[rnsz])/	=> 'es',
+  );
+
 }
 
 sub sing2plural {
   $_ = shift;
   defined $_ || return undef;
 
-  defined $sing2plural{$_} && return $sing2plural{$_};
+  defined $exceptions{$_} && return $exceptions{$_};
 
-  # -s, -x -> no change is needed (unless its a particular case)
-  # if (s/[sx]$//) {return $_}
-  # -ás, -ês -> adds 'es'
-  if (s/ás$/ases/) {return $_}
-  if (s/ês$/eses/) {return $_}
-  # -il tónico -> the 'l' changes to 's' NOT YET IMPLEMENTED
-  # if (s/il$/is/) {return $_}
-  # -il átono -> changes to 'eis' NOT YET IMPLEMENTED
-  # if (s/il$/eis/) {return $_}
-  # -el, -ol -> -éis, -óis
-  if (s/el$/éis/) {return $_}
-  if (s/ol$/óis/) {return $_}
-  # -al, -oi, -ul -> changes to -ais, -ois, -uis
-  if (s/al$/ais/) {return $_}
-  if (s/oi$/ois/) {return $_}
-  if (s/ul$/uis/) {return $_}
-  # -m -> changes to -ns
-  if (s/m$/ns/) {return $_}
-  # -ão -> changes to -ãos, -ães, -ões NOT YET IMPLEMENTED
-  # ...
+  for my $rule (@rules) {
+    if (s/$rule$/$rules{$rule}/) {return $_}
+  }
 
-  # general rules
-  if (s/(?<=[rnsz])$/es/) {return $_} # adds 'es'
-  if (s/([aeiou]|[aeiou][iu]|[iu][aeiou])$/$&s/) {return $_} # adds 's'
+  if (/il$/) {
+    my @syl = hyphenate($_);
+
+    s!il$!$syl[-2] =~ /[ãâáêéíóõôúÃÁÉÍÓÕÔÊÂÚ]/ ? 'eis' : 'is' !e;
+  }
+
+  return $_;
 }
 
 1;
@@ -89,13 +91,26 @@ __END__
 
 =head1 DESCRIPTION
 
-Converts Portuguese words from singular to plural. Words ending in -il still
-aren't being treated. There may be some special cases that will fail (actually,
-there *WILL* be some).
+Converts Portuguese words from singular to plural. There may be some
+special cases that will fail (words ending in -ão or -s might fail);
+this should be taken care of soon.
+
+=head1 SEE ALSO
+
+If you're into Natural Language Processing tools, you may like this
+Portuguese site: http://natura.di.uminho.pt
+
+Gramática Universal da Língua Portuguesa (Texto Editora)
+
+=head1 MESSAGE FROM THE AUTHOR
+
+If you're using this module, please drop me a line to my e-mail. Tell
+me what you're doing with it. Also, feel free to suggest new
+bugs^H^H^H^H^H features.
 
 =head1 AUTHOR
 
-Jose Alves de Castro, E<lt>jac@natura.di.uminho.pt<gt>
+Jose Alves de Castro, E<lt>cog [at] cpan [dot] org<gt>
 
 =head1 COPYRIGHT AND LICENSE
 

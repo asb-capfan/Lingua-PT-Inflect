@@ -1,0 +1,9 @@
+Revision history for Perl extension Lingua::PT::Inflect.
+
+0.01  Mon May 10 16:49:47 2004
+	- first release ready. still has untreated cases
+
+0.01  Mon May 10 15:22:47 2004
+	- original version; created by h2xs 1.22 with options
+		-XAn Lingua::PT::Inflect
+

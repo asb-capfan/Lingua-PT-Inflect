@@ -1,5 +1,5 @@
 Changes
-Lingua/PT/Inflect.pm
+lib/Lingua/PT/Inflect.pm
 Makefile.PL
 MANIFEST
 README

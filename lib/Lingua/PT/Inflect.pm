@@ -10,13 +10,13 @@ require Exporter;
 our @ISA = qw(Exporter);
 
 our %EXPORT_TAGS = ( 'all' => [ qw(
-	sing2plural
+    sing2plural
 ) ] );
 
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
 our @EXPORT = qw(
-	sing2plural
+    sing2plural
 );
 
 our $VERSION = '0.06';
@@ -46,32 +46,32 @@ my (%exceptions,@rules,%rules);
 
 BEGIN {
   %exceptions = (
-    'lápis'	=> 'lápis',
-    'pires'	=> 'pires',
+    'lápis'     => 'lápis',
+    'pires'     => 'pires',
 
-    'mão'	=> 'mãos',
-    'afegão'	=> 'afegãos',
+    'mão'       => 'mãos',
+    'afegão'    => 'afegãos',
 
-    'pão'	=> 'pães',
-    'capitão'	=> 'capitães',
-    'cão'	=> 'cães',
-    'alemão'	=> 'alemães',
+    'pão'       => 'pães',
+    'capitão'   => 'capitães',
+    'cão'       => 'cães',
+    'alemão'    => 'alemães',
   );
 
   @rules = map qr/$_/, qw(ás ês el ol al oi ul m ão (?<=[aeiou]) (?<=[rnsz]));
 
   %rules = (
-    qr/ás/	=> 'ases',
-    qr/ês/	=> 'eses',
-    qr/el/	=> 'éis',
-    qr/ol/	=> 'óis',
-    qr/al/	=> 'ais',
-    qr/oi/	=> 'ois',
-    qr/ul/	=> 'uis',
-    qr/m/	=> 'ns',
-    qr/ão/	=> 'ões',
-    qr/(?<=[aeiou])/	=> 's',
-    qr/(?<=[rnsz])/	=> 'es',
+    qr/ás/  => 'ases',
+    qr/ês/  => 'eses',
+    qr/el/  => 'éis',
+    qr/ol/  => 'óis',
+    qr/al/  => 'ais',
+    qr/oi/  => 'ois',
+    qr/ul/  => 'uis',
+    qr/m/   => 'ns',
+    qr/ão/  => 'ões',
+    qr/(?<=[aeiou])/    => 's',
+    qr/(?<=[rnsz])/     => 'es',
   );
 
 }

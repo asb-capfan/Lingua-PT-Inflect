@@ -148,7 +148,7 @@ those words that need to be checked.
 =head1 SEE ALSO
 
 More tools for the Portuguese language processing can be found at the Natura
-project: http://natura.di.uminho.pt
+project: L<http://natura.di.uminho.pt>
 
 =head1 AUTHOR
 

@@ -19,7 +19,7 @@ our @EXPORT = qw(
     sing2plural
 );
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 =head1 NAME
 

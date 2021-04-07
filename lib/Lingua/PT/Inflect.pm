@@ -82,10 +82,10 @@ BEGIN {
 
 =head2 new
 
-Creates a new Lingua::PT::Inflect object.
+Creates a new C<Lingua::PT::Inflect> object.
 
 If you're doing this lots of time, it would probably be better for you
-to use the sing2plural function directly (that is, creating a new
+to use the C<sing2plural> function directly (that is, creating a new
 object for each word in a long text doesn't seem so bright if you're
 not going to use it later on).
 

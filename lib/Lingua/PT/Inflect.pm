@@ -23,7 +23,7 @@ our $VERSION = '0.07';
 
 =head1 NAME
 
-=encoding utf8
+=encoding latin1
 
 Lingua::PT::Inflect - Converts Portuguese words from singular to plural
 
